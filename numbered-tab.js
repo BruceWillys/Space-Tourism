@@ -1,3 +1,25 @@
+const handleSizeCHange = () => {
+  const tButtons = document.querySelectorAll(".t-button");
+
+  let currentTButton = tButtons[0];
+
+  tButtons.forEach((tButton) => {
+    if (tButton.classList.contains("current-t-button")) {
+      currentTButton = tButton;
+    }
+  });
+
+  currentTButton.click();
+};
+
+window.addEventListener("load", () => {
+  handleSizeCHange();
+});
+
+window.addEventListener("resize", () => {
+  handleSizeCHange();
+});
+
 const tabList = document.querySelector('[role="tablist"]');
 const tabs = tabList.querySelectorAll('[role="tab"]');
 
@@ -35,6 +57,7 @@ function changeTabPanel(e) {
   const targetTab = e.target;
   const targetPanel = targetTab.getAttribute("aria-controls");
   const targetImage = targetTab.getAttribute("data-image");
+  const targetImageLg = targetTab.getAttribute("data-image-lg");
 
   const tabContainer = targetTab.parentNode;
   const mainContainer = tabContainer.parentNode;
@@ -59,7 +82,11 @@ function changeTabPanel(e) {
   hideContent(mainContainer, "picture");
 
   // mainContainer.querySelector([`#${targetImage}`]).removeAttribute("hidden");
-  showContent(mainContainer, [`#${targetImage}`]);
+    if (window.innerWidth <= 720) {
+        showContent(mainContainer, [`#${targetImage}`]);
+    } else {
+        showContent(mainContainer, [`#${targetImageLg}`]);
+    }
 }
 
 function hideContent(parent, content) {
@@ -71,3 +98,4 @@ function hideContent(parent, content) {
 function showContent(parent, content) {
   parent.querySelector(content)?.removeAttribute("hidden");
 }
+

@@ -548,7 +548,7 @@ animation-fill-mode: forwards;
 }
 
 
-[aria-selected="true"]   span{
+[aria-selected="true"]  + span{
   /* background-color: hsl(var(--clr-white) / 1); */
   color: hsl(var(--clr-dark));
 }
